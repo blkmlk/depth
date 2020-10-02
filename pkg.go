@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"go/build"
+	"os"
 	"path"
 	"sort"
 	"strings"
@@ -44,7 +45,7 @@ func (p *Pkg) Resolve(i Importer) {
 
 	pkg, err := i.Import(name, p.SrcDir, importMode)
 	if err != nil {
-		fmt.Println("ERROR:", pkg, p.SrcDir, err.Error())
+		fmt.Fprintln(os.Stderr, "ERROR:", pkg, p.SrcDir, err.Error())
 		// TODO: Check the error type?
 		p.Resolved = false
 		return
