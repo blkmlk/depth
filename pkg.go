@@ -2,6 +2,7 @@ package depth
 
 import (
 	"bytes"
+	"fmt"
 	"go/build"
 	"path"
 	"sort"
@@ -43,6 +44,7 @@ func (p *Pkg) Resolve(i Importer) {
 
 	pkg, err := i.Import(name, p.SrcDir, importMode)
 	if err != nil {
+		fmt.Println("ERROR:", pkg, p.SrcDir, err.Error())
 		// TODO: Check the error type?
 		p.Resolved = false
 		return
